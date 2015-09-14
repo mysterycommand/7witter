@@ -91,6 +91,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        let success = { (credential: BDBOAuth1Credential!) -> Void in
+//            println(credential)
+            TwitterClient.instance.requestSerializer.saveAccessToken(credential)
+            
+            TwitterClient.instance.GET(
+                "1.1/account/verify_credentials.json",
+                parameters: nil,
+                success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+                    println(response)
+                },
+                failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                    println(error)
+                }
+            )
+            
+            TwitterClient.instance.GET(
+                "1.1/statuses/home_timeline.json",
+                parameters: nil,
+                success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+                    println(response)
+                },
+                failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                    println(error)
+                }
+            )
+        }
+
+        let failure = { (error: NSError!) -> Void in
+            println(error)
+        }
+        
+        TwitterClient.instance.fetchAccessTokenWithPath(
+            "oauth/access_token",
+            method: "POST",
+            requestToken:
+            BDBOAuth1Credential(queryString: url.query),
+            success: success,
+            failure: failure
+        )
+        
+        return true
+    }
 
 }
 

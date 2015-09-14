@@ -38,11 +38,11 @@ class ViewController: UIViewController {
     }
 
     func signInTouchUpInside(sender: AnyObject, event: UIEvent) {
-        println(sender)
-        println(event)
+//        println(sender)
+//        println(event)
 
         let success = { (credential: BDBOAuth1Credential!) -> Void in
-            println(credential)
+//            println(credential)
             let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(credential.token)")
             UIApplication.sharedApplication().openURL(authURL!)
         }
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         TwitterClient.instance.fetchRequestTokenWithPath(
             "oauth/request_token",
             method: "GET",
-            callbackURL: NSURL(string: "cptwitterdemo://oauth"),
+            callbackURL: NSURL(string: "sevenwitter://oauth"),
             scope: nil,
             success: success,
             failure: failure
