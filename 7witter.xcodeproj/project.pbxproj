@@ -14,6 +14,8 @@
 		84634E831BA7487D00AECF5B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84634E811BA7487D00AECF5B /* LaunchScreen.xib */; };
 		84634E8F1BA7487D00AECF5B /* _witterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84634E8E1BA7487D00AECF5B /* _witterTests.swift */; };
 		848368051BA749B300077B9E /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848368041BA749B300077B9E /* TwitterClient.swift */; };
+		848368081BA77A7800077B9E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848368071BA77A7800077B9E /* User.swift */; };
+		8483680A1BA77A8B00077B9E /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848368091BA77A8B00077B9E /* Tweet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		84634E8E1BA7487D00AECF5B /* _witterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _witterTests.swift; sourceTree = "<group>"; };
 		848368001BA7495500077B9E /* 7witter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "7witter-Bridging-Header.h"; sourceTree = "<group>"; };
 		848368041BA749B300077B9E /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
+		848368071BA77A7800077B9E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		848368091BA77A8B00077B9E /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		D57E833C1FED78A7170B6F4B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB31E6556E26D7EA88909FC5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FF723AA1B51C1C8DA2BF87DE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 		84634E751BA7487D00AECF5B /* 7witter */ = {
 			isa = PBXGroup;
 			children = (
+				848368061BA77A6400077B9E /* Models */,
 				848368031BA7497B00077B9E /* API */,
 				84634E781BA7487D00AECF5B /* AppDelegate.swift */,
 				84634E7A1BA7487D00AECF5B /* ViewController.swift */,
@@ -127,6 +132,15 @@
 				848368041BA749B300077B9E /* TwitterClient.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		848368061BA77A6400077B9E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				848368071BA77A7800077B9E /* User.swift */,
+				848368091BA77A8B00077B9E /* Tweet.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		9B1497A91C1D0EE8432E813D /* Frameworks */ = {
@@ -192,7 +206,9 @@
 		84634E6B1BA7487D00AECF5B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Mystery Command";
 				TargetAttributes = {
 					84634E721BA7487D00AECF5B = {
@@ -281,6 +297,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				848368081BA77A7800077B9E /* User.swift in Sources */,
+				8483680A1BA77A8B00077B9E /* Tweet.swift in Sources */,
 				84634E7B1BA7487D00AECF5B /* ViewController.swift in Sources */,
 				848368051BA749B300077B9E /* TwitterClient.swift in Sources */,
 				84634E791BA7487D00AECF5B /* AppDelegate.swift in Sources */,
@@ -338,6 +356,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -408,6 +427,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = 7witter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mysterycommand.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "7witter/7witter-Bridging-Header.h";
@@ -425,6 +445,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = 7witter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mysterycommand.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "7witter/7witter-Bridging-Header.h";
@@ -445,6 +466,7 @@
 				);
 				INFOPLIST_FILE = 7witterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mysterycommand.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/7witter.app/7witter";
 			};
@@ -460,6 +482,7 @@
 				);
 				INFOPLIST_FILE = 7witterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mysterycommand.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/7witter.app/7witter";
 			};

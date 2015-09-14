@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         let success = { (credential: BDBOAuth1Credential!) -> Void in
 //            println(credential)
             TwitterClient.instance.requestSerializer.saveAccessToken(credential)
@@ -100,10 +100,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 "1.1/account/verify_credentials.json",
                 parameters: nil,
                 success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                    println(response)
+//                    println(response)
+                    if let response = response as? NSDictionary {
+                        let user = User(dictionary: response)
+                        print(user.name)
+                    }
                 },
                 failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                    println(error)
+//                    println(error)
                 }
             )
             
@@ -111,16 +115,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 "1.1/statuses/home_timeline.json",
                 parameters: nil,
                 success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                    println(response)
+                    if let response = response as? [NSDictionary] {
+                        let tweets = response.map({ (dictionary: NSDictionary) -> Tweet in
+                            return Tweet(dictionary: dictionary)
+                        })
+                        print(tweets[0].text)
+                    }
                 },
                 failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                    println(error)
+//                    println(error)
                 }
             )
         }
 
         let failure = { (error: NSError!) -> Void in
-            println(error)
+            print(error)
         }
         
         TwitterClient.instance.fetchAccessTokenWithPath(

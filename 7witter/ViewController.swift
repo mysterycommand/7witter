@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     let signInButton = UIButton()
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         }
 
         let failure = { (error: NSError!) -> Void in
-            println(error)
+            print(error)
         }
         
         TwitterClient.instance.requestSerializer.removeAccessToken()
