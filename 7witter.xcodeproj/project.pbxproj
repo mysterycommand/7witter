@@ -10,7 +10,6 @@
 		7A400B9DB1817C0B1B939F2C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D57E833C1FED78A7170B6F4B /* libPods.a */; };
 		84634E791BA7487D00AECF5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84634E781BA7487D00AECF5B /* AppDelegate.swift */; };
 		84634E7B1BA7487D00AECF5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84634E7A1BA7487D00AECF5B /* ViewController.swift */; };
-		84634E7E1BA7487D00AECF5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84634E7C1BA7487D00AECF5B /* Main.storyboard */; };
 		84634E801BA7487D00AECF5B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84634E7F1BA7487D00AECF5B /* Images.xcassets */; };
 		84634E831BA7487D00AECF5B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84634E811BA7487D00AECF5B /* LaunchScreen.xib */; };
 		84634E8F1BA7487D00AECF5B /* _witterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84634E8E1BA7487D00AECF5B /* _witterTests.swift */; };
@@ -32,7 +31,6 @@
 		84634E771BA7487D00AECF5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84634E781BA7487D00AECF5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84634E7A1BA7487D00AECF5B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		84634E7D1BA7487D00AECF5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84634E7F1BA7487D00AECF5B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		84634E821BA7487D00AECF5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		84634E881BA7487D00AECF5B /* 7witterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 7witterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,7 +88,6 @@
 				848368031BA7497B00077B9E /* API */,
 				84634E781BA7487D00AECF5B /* AppDelegate.swift */,
 				84634E7A1BA7487D00AECF5B /* ViewController.swift */,
-				84634E7C1BA7487D00AECF5B /* Main.storyboard */,
 				84634E7F1BA7487D00AECF5B /* Images.xcassets */,
 				84634E811BA7487D00AECF5B /* LaunchScreen.xib */,
 				84634E761BA7487D00AECF5B /* Supporting Files */,
@@ -200,6 +197,7 @@
 				TargetAttributes = {
 					84634E721BA7487D00AECF5B = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 7KSE8JWTDC;
 					};
 					84634E871BA7487D00AECF5B = {
 						CreatedOnToolsVersion = 6.4;
@@ -231,7 +229,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84634E7E1BA7487D00AECF5B /* Main.storyboard in Resources */,
 				84634E831BA7487D00AECF5B /* LaunchScreen.xib in Resources */,
 				84634E801BA7487D00AECF5B /* Images.xcassets in Resources */,
 			);
@@ -309,14 +306,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		84634E7C1BA7487D00AECF5B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				84634E7D1BA7487D00AECF5B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		84634E811BA7487D00AECF5B /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -415,9 +404,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = 7witter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "7witter/7witter-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -429,9 +421,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = 7witter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "7witter/7witter-Bridging-Header.h";
 			};
 			name = Release;

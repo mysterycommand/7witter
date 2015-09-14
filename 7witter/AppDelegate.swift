@@ -8,6 +8,44 @@
 
 import UIKit
 
+extension UIColor {
+    class func randomChannel() -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(UINT32_MAX))
+    }
+    
+    class func randomColor() -> UIColor {
+        return UIColor(
+            red: UIColor.randomChannel(),
+            green: UIColor.randomChannel(),
+            blue: UIColor.randomChannel(),
+            alpha: 1.0)
+    }
+    
+    var red: CGFloat {
+        return CGColorGetComponents(self.CGColor)[0]
+    }
+    
+    var green: CGFloat {
+        return CGColorGetComponents(self.CGColor)[1]
+    }
+    
+    var blue: CGFloat {
+        return CGColorGetComponents(self.CGColor)[2]
+    }
+    
+    var alpha: CGFloat {
+        return CGColorGetComponents(self.CGColor)[3]
+    }
+    
+    func inverse() -> UIColor {
+        return UIColor(
+            red: 1.0 - self.red,
+            green: 1.0 - self.green,
+            blue: 1.0 - self.blue,
+            alpha: 1.0)
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,6 +54,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        let navController = UINavigationController()
+        navController.navigationBar.translucent = false
+        navController.viewControllers = [
+            ViewController()
+        ]
+        
+        window?.backgroundColor = UIColor.randomColor()
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
+        
         return true
     }
 

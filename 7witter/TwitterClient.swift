@@ -15,6 +15,10 @@ private struct Twitter {
 }
 
 class TwitterClient: BDBOAuth1RequestOperationManager {
+
+    /**
+    * Singleton pattern for Swift/iOS.
+    **/
     class var instance: TwitterClient {
         struct Static {
             static let instance = TwitterClient(
