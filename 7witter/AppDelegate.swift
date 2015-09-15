@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         
         if User.currentUser != nil {
-            navController.pushViewController(TweetsViewController(), animated: true)    
+            navController.pushViewController(TweetsViewController(), animated: false)
         }
         
         window?.backgroundColor = UIColor.randomColor()

@@ -45,8 +45,8 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             self.signInCompletion?(user: nil, error: error)
         }
         
-        self.requestSerializer.removeAccessToken()
-        self.fetchRequestTokenWithPath(
+        requestSerializer.removeAccessToken()
+        fetchRequestTokenWithPath(
             "oauth/request_token",
             method: "GET",
             callbackURL: NSURL(string: "sevenwitter://oauth"),
@@ -78,32 +78,39 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                     self.signInCompletion?(user: nil, error: error)
                 }
             )
-            
-//            TwitterClient.instance.GET(
-//                "1.1/statuses/home_timeline.json",
-//                parameters: nil,
-//                success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-//                    if let response = response as? [NSDictionary] {
-//                        let tweets = response.map({ (dictionary: NSDictionary) -> Tweet in
-//                            return Tweet(dictionary: dictionary)
-//                        })
-//                        print(tweets[0].text)
-//                    }
-//                },
-//                failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-//                }
-//            )
         }
         
         let failure = { (error: NSError!) -> Void in
             self.signInCompletion?(user: nil, error: error)
         }
         
-        self.fetchAccessTokenWithPath(
+        fetchAccessTokenWithPath(
             "oauth/access_token",
             method: "POST",
             requestToken:
             BDBOAuth1Credential(queryString: url.query),
+            success: success,
+            failure: failure
+        )
+    }
+    
+    func homeTimeline(completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+        let success = { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> () in
+            if let response = response as? [NSDictionary] {
+                let tweets = response.map({ (dictionary: NSDictionary) -> Tweet in
+                    return Tweet(dictionary: dictionary)
+                })
+                completion(tweets: tweets, error: nil)
+            }
+        }
+
+        let failure = { (operation: AFHTTPRequestOperation!, error: NSError!) -> () in
+            completion(tweets: nil, error: error)
+        }
+
+        GET(
+            "1.1/statuses/home_timeline.json",
+            parameters: nil,
             success: success,
             failure: failure
         )
