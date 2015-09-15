@@ -56,18 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let initialViewController: UIViewController
-        if User.currentUser == nil {
-            initialViewController = SignInViewController()
-        } else {
-            initialViewController = TweetsViewController()
-        }
-        
         let navController = UINavigationController()
         navController.navigationBar.translucent = false
         navController.viewControllers = [
-            initialViewController
+            SignInViewController()
         ]
+        
+        if User.currentUser != nil {
+            navController.pushViewController(TweetsViewController(), animated: true)    
+        }
         
         window?.backgroundColor = UIColor.randomColor()
         window?.rootViewController = navController

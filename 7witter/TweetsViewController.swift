@@ -27,7 +27,7 @@ class TweetsViewController: UIViewController {
         view.backgroundColor = UIColor.randomColor()
         
         signOutButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        signOutButton.setTitle("Sign Out of Twitter", forState: .Normal)
+        signOutButton.setTitle("Sign Out", forState: .Normal)
         signOutButton.backgroundColor = UIColor.randomColor()
         signOutButton.addTarget(self, action: "signOutTouchUpInside:event:", forControlEvents: .TouchUpInside)
         
@@ -52,6 +52,7 @@ class TweetsViewController: UIViewController {
     
     func signOutTouchUpInside(sender: AnyObject, event: UIEvent) {
         TwitterClient.instance.signOut()
+        self.navigationController?.popViewControllerAnimated(true)
     }
 
 }

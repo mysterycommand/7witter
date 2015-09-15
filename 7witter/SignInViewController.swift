@@ -27,7 +27,7 @@ class SignInViewController: UIViewController {
         view.backgroundColor = UIColor.randomColor()
 
         signInButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        signInButton.setTitle("Sign In with Twitter", forState: .Normal)
+        signInButton.setTitle("Sign In", forState: .Normal)
         signInButton.backgroundColor = UIColor.randomColor()
         signInButton.addTarget(self, action: "signInTouchUpInside:event:", forControlEvents: .TouchUpInside)
         
