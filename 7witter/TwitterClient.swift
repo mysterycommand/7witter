@@ -94,7 +94,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         )
     }
     
-    func homeTimeline(completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+    func homeTimeline(parameters: AnyObject?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         let success = { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> () in
             if let response = response as? [NSDictionary] {
                 let tweets = response.map({ (dictionary: NSDictionary) -> Tweet in
@@ -110,7 +110,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
 
         GET(
             "1.1/statuses/home_timeline.json",
-            parameters: nil,
+            parameters: parameters,
             success: success,
             failure: failure
         )

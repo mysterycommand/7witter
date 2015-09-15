@@ -69,7 +69,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     override func viewDidAppear(animated: Bool) {
-        TwitterClient.instance.homeTimeline { (tweets, error) -> () in
+        TwitterClient.instance.homeTimeline(nil) { (tweets, error) -> () in
             if let tweets = tweets {
                 self.tweets = tweets
                 self.tableView.reloadData()
@@ -102,8 +102,21 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetTableViewCell", forIndexPath: indexPath)
         
-        if let cell = cell as? TweetTableViewCell {
-            cell.tweet = tweets?[indexPath.row]
+        if let tweet = tweets?[indexPath.row] {
+            (cell as? TweetTableViewCell)?.tweet = tweet
+
+            if indexPath.row == (tweets?.count)! - 1 {
+                let parameters = [
+                    "max_id": tweet.id
+                ]
+                
+                TwitterClient.instance.homeTimeline(parameters as? AnyObject) { (tweets, error) -> () in
+                    if let tweets = tweets {
+                        self.tweets = self.tweets! + tweets
+                        self.tableView.reloadData()
+                    }
+                }
+            }
         }
         
         return cell
