@@ -10,7 +10,9 @@ import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let signOutButton = UIButton()
+    let signOutBarButtonItem = UIBarButtonItem()
+    let newBarButtonItem = UIBarButtonItem()
+
     let refreshControl = UIRefreshControl()
     let tableView = UITableView()
     
@@ -22,6 +24,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+
+        title = "Home"
     }
 
     override func viewDidLoad() {
@@ -29,15 +33,16 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         // Do any additional setup after loading the view.
         
         view.backgroundColor = UIColor.randomColor()
-        
-        signOutButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        signOutButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        signOutButton.setTitle("Sign Out", forState: .Normal)
-        signOutButton.backgroundColor = UIColor.randomColor()
-        signOutButton.addTarget(self, action: "signOutTouchUpInside:event:", forControlEvents: .TouchUpInside)
-        
-        view.addSubview(signOutButton)
+
+        signOutBarButtonItem.target = self
+        signOutBarButtonItem.action = "signOutTouchUpInside:event:"
+        signOutBarButtonItem.title = "Sign Out"
+        navigationItem.setLeftBarButtonItem(signOutBarButtonItem, animated: true)
+
+        newBarButtonItem.target = self
+        newBarButtonItem.action = "newTouchUpInside:event:"
+        newBarButtonItem.title = "New"
+        navigationItem.setRightBarButtonItem(newBarButtonItem, animated: true)
         
         tableView.frame = UIScreen.mainScreen().bounds
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,13 +64,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         view.addSubview(tableView)
         
         let views = [
-            "signOutButton": signOutButton,
             "tableView": tableView
         ]
         
         view.addConstraints(Vfl.make("H:|-8-[tableView]-8-|", views: views))
-        view.addConstraints(Vfl.make("H:|-8-[signOutButton]-8-|", views: views))
-        view.addConstraints(Vfl.make("V:|-8-[signOutButton]-8-[tableView]-8-|", views: views))
+        view.addConstraints(Vfl.make("V:|-8-[tableView]-8-|", views: views))
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -107,6 +110,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func signOutTouchUpInside(sender: AnyObject, event: UIEvent) {
         TwitterClient.instance.signOut()
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func newTouchUpInside(sender: AnyObject, event: UIEvent) {
+        print("Hi")
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
