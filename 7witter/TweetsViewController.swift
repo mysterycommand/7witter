@@ -11,6 +11,7 @@ import UIKit
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let signOutButton = UIButton()
+    let refreshControl = UIRefreshControl()
     let tableView = UITableView()
     
     var tweets: [Tweet]?
@@ -48,6 +49,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        refreshControl.tintColor = UIColor.randomColor()
+        refreshControl.addTarget(self, action: "fetchTweets:event:", forControlEvents: .ValueChanged)
+        
+        let uitvc = UITableViewController()
+        uitvc.tableView = tableView
+        uitvc.refreshControl = refreshControl
+        
         view.addSubview(tableView)
         
         let views = [
@@ -69,10 +77,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     override func viewDidAppear(animated: Bool) {
+        fetchTweets(nil, event: nil)
+    }
+    
+    func fetchTweets(sender: AnyObject?, event: UIEvent?) {
         TwitterClient.instance.homeTimeline(nil) { (tweets, error) -> () in
             if let tweets = tweets {
                 self.tweets = tweets
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
             
             if let error = error {
