@@ -45,8 +45,8 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             self.signInCompletion?(user: nil, error: error)
         }
         
-        TwitterClient.instance.requestSerializer.removeAccessToken()
-        TwitterClient.instance.fetchRequestTokenWithPath(
+        self.requestSerializer.removeAccessToken()
+        self.fetchRequestTokenWithPath(
             "oauth/request_token",
             method: "GET",
             callbackURL: NSURL(string: "sevenwitter://oauth"),
@@ -56,17 +56,22 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         )
     }
     
+    func signOut() {
+        User.currentUser = nil
+        requestSerializer.removeAccessToken()
+    }
+    
     func openURL(url: NSURL) {
         let success = { (credential: BDBOAuth1Credential!) -> Void in
-            TwitterClient.instance.requestSerializer.saveAccessToken(credential)
+            self.requestSerializer.saveAccessToken(credential)
             
-            TwitterClient.instance.GET(
+            self.GET(
                 "1.1/account/verify_credentials.json",
                 parameters: nil,
                 success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
                     if let response = response as? NSDictionary {
-                        let user = User(dictionary: response)
-                        self.signInCompletion?(user: user, error: nil)
+                        User.currentUser = User(dictionary: response)
+                        self.signInCompletion?(user: User.currentUser, error: nil)
                     }
                 },
                 failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
@@ -94,7 +99,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             self.signInCompletion?(user: nil, error: error)
         }
         
-        fetchAccessTokenWithPath(
+        self.fetchAccessTokenWithPath(
             "oauth/access_token",
             method: "POST",
             requestToken:

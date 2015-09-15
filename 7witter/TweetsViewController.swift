@@ -10,6 +10,8 @@ import UIKit
 
 class TweetsViewController: UIViewController {
     
+    let signOutButton = UIButton()
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -23,6 +25,13 @@ class TweetsViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         view.backgroundColor = UIColor.randomColor()
+        
+        signOutButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        signOutButton.setTitle("Sign Out of Twitter", forState: .Normal)
+        signOutButton.backgroundColor = UIColor.randomColor()
+        signOutButton.addTarget(self, action: "signOutTouchUpInside:event:", forControlEvents: .TouchUpInside)
+        
+        view.addSubview(signOutButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,5 +49,9 @@ class TweetsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func signOutTouchUpInside(sender: AnyObject, event: UIEvent) {
+        TwitterClient.instance.signOut()
+    }
 
 }
