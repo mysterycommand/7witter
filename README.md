@@ -2,7 +2,7 @@
 
 This is a basic twitter app to read and compose tweets via the [Twitter API](https://apps.twitter.com/).
 
-Time spent: `1 + 5 + 2 + 1`
+Time spent: `14`
 
 ### Features
 
