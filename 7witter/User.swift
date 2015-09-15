@@ -31,7 +31,7 @@ class User {
 
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
-        profileImageURLString = dictionary["profile_image_url"] as? String
+        profileImageURLString = dictionary["profile_image_url_https"] as? String
         profileImageURL = NSURL(string: profileImageURLString!)
         description = dictionary["description"] as? String
     }

@@ -8,12 +8,6 @@
 
 import UIKit
 
-extension NSLayoutFormatOptions {
-    static var None: NSLayoutFormatOptions {
-        return NSLayoutFormatOptions(rawValue: 0)
-    }
-}
-
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let signOutButton = UIButton()
@@ -49,7 +43,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.separatorStyle = .None
         tableView.backgroundColor = UIColor.randomColor()
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        tableView.registerClass(TweetTableViewCell.self, forCellReuseIdentifier: "TweetTableViewCell")
         
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -61,14 +55,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             "tableView": tableView
         ]
         
-        let VFLH = "H:|-8-[tableView]-8-|"
-        let VFLV = "V:|-8-[tableView]-8-|"
-        
-        let tableViewContraintsH = NSLayoutConstraint.constraintsWithVisualFormat(VFLH, options: .None, metrics: nil, views: views)
-        let tableViewContraintsV = NSLayoutConstraint.constraintsWithVisualFormat(VFLV, options: .None, metrics: nil, views: views)
-        
-        view.addConstraints(tableViewContraintsH)
-        view.addConstraints(tableViewContraintsV)
+        view.addConstraints(Vfl.make("H:|-8-[tableView]-8-|", views: views))
+        view.addConstraints(Vfl.make("H:|-8-[signOutButton]-8-|", views: views))
+        view.addConstraints(Vfl.make("V:|-8-[signOutButton]-8-[tableView]-8-|", views: views))
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -111,10 +100,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("UITableViewCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetTableViewCell", forIndexPath: indexPath)
         
-        let tweet = tweets?[indexPath.row]
-        cell.textLabel?.text = tweet?.text
+        if let cell = cell as? TweetTableViewCell {
+            cell.tweet = tweets?[indexPath.row]
+        }
         
         return cell
     }
