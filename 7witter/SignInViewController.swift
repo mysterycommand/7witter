@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SignInViewController: UIViewController {
     
     let signInButton = UIButton()
     
@@ -24,6 +24,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        view.backgroundColor = UIColor.randomColor()
+
         signInButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         signInButton.setTitle("Sign In with Twitter", forState: .Normal)
         signInButton.backgroundColor = UIColor.randomColor()
@@ -38,28 +40,11 @@ class ViewController: UIViewController {
     }
 
     func signInTouchUpInside(sender: AnyObject, event: UIEvent) {
-//        println(sender)
-//        println(event)
-
-        let success = { (credential: BDBOAuth1Credential!) -> Void in
-//            println(credential)
-            let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(credential.token)")
-            UIApplication.sharedApplication().openURL(authURL!)
+        TwitterClient.instance.signIn { (user, error) -> () in
+            if user != nil {
+                self.navigationController?.pushViewController(TweetsViewController(), animated: true)
+            }
         }
-
-        let failure = { (error: NSError!) -> Void in
-            print(error)
-        }
-        
-        TwitterClient.instance.requestSerializer.removeAccessToken()
-        TwitterClient.instance.fetchRequestTokenWithPath(
-            "oauth/request_token",
-            method: "GET",
-            callbackURL: NSURL(string: "sevenwitter://oauth"),
-            scope: nil,
-            success: success,
-            failure: failure
-        )
     }
 
 }

@@ -8,6 +8,8 @@
 
 import Foundation
 
+private var _currentUser: User?
+
 class User {
     var name: String?
     var screenName: String?
@@ -21,5 +23,14 @@ class User {
         profileImageURLString = dictionary["profile_image_url"] as? String
         profileImageURL = NSURL(string: profileImageURLString!)
         description = dictionary["description"] as? String
+    }
+    
+    class var currentUser: User? {
+        get {
+            return _currentUser
+        }
+        set(user) {
+            _currentUser = user
+        }
     }
 }
