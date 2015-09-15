@@ -74,6 +74,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
                 self.tweets = tweets
                 self.tableView.reloadData()
             }
+            
+            if let error = error {
+                print(error)
+            }
         }
     }
 
@@ -107,10 +111,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 
             if indexPath.row == (tweets?.count)! - 1 {
                 let parameters = [
-                    "max_id": tweet.id
+                    "max_id": tweet.id!
                 ]
                 
-                TwitterClient.instance.homeTimeline(parameters as? AnyObject) { (tweets, error) -> () in
+                TwitterClient.instance.homeTimeline(parameters as AnyObject) { (tweets, error) -> () in
                     if let tweets = tweets {
                         self.tweets = self.tweets! + tweets
                         self.tableView.reloadData()
