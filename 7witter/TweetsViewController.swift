@@ -50,7 +50,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.backgroundColor = UIColor.randomColor()
         tableView.registerClass(TweetTableViewCell.self, forCellReuseIdentifier: "TweetTableViewCell")
         
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 66
         tableView.rowHeight = UITableViewAutomaticDimension
         
         refreshControl.tintColor = UIColor.randomColor()
@@ -143,6 +143,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         return cell
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let detail = TweetDetailViewController()
+        detail.tweet = tweets?[indexPath.row]
+
+        navigationController?.pushViewController(detail, animated: true)
     }
 
 }
