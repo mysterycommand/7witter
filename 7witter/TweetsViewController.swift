@@ -112,7 +112,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func newTouchUpInside(sender: AnyObject, event: UIEvent) {
-        print("Hi")
+        navigationController?.pushViewController(ComposeViewController(), animated: true)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
