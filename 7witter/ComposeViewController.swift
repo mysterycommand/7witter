@@ -97,8 +97,12 @@ class ComposeViewController: UIViewController {
     }
     
     func tweetTouchUpInside(sender: AnyObject, event: UIEvent) {
-        tweetTextView.resignFirstResponder()
-        navigationController?.popViewControllerAnimated(true)
+        let parameters = ["status": tweetTextView.text]
+
+        TwitterClient.instance.statusesUpdate(parameters) { (success, error) -> () in
+            self.tweetTextView.resignFirstResponder()
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
 
 }

@@ -13,6 +13,8 @@ class ActionsView: UIView {
     var replyButton = UIButton()
     var retweetButton = UIButton()
     var favoriteButton = UIButton()
+
+    var tweet: Tweet?
     
     static let activeColor = UIColor.randomColor()
     static let inactiveColor = ActionsView.activeColor.inverse()
@@ -43,6 +45,10 @@ class ActionsView: UIView {
             addSubview(button)
         }
 
+        replyButton.addTarget(self, action: "replyButtonTouchUpInside:event:", forControlEvents: .TouchUpInside)
+        retweetButton.addTarget(self, action: "retweetButtonTouchUpInside:event:", forControlEvents: .TouchUpInside)
+        favoriteButton.addTarget(self, action: "favoriteButtonTouchUpInside:event:", forControlEvents: .TouchUpInside)
+
         let views = [
             "repl": replyButton,
             "retw": retweetButton,
@@ -62,5 +68,29 @@ class ActionsView: UIView {
         // Drawing code
     }
     */
+   
+    func replyButtonTouchUpInside(sender: AnyObject, event: UIEvent) {
+//        let parameters = ["": ""]
+//        TwitterClient.instance.reply(parameters) { (success, error) -> () in
+//            print(success)
+//        }
+    }
+
+    func retweetButtonTouchUpInside(sender: AnyObject, event: UIEvent) {
+        let parameters = ["id": "\(tweet!.id!)"]
+
+        TwitterClient.instance.statusesRetweet(parameters) { (success, error) -> () in
+            print(success, error)
+        }
+    }
+
+    func favoriteButtonTouchUpInside(sender: AnyObject, event: UIEvent) {
+        let parameters = ["id": "\(tweet!.id!)"]
+
+        TwitterClient.instance.favoritesCreate(parameters) { (success, error) -> () in
+            print(success, error)
+        }
+    }
+
 
 }

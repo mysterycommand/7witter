@@ -116,12 +116,9 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         )
     }
 
-    func favoritesCreate(parameters: AnyObject?, completion: (success: String?, error: NSError?) -> ()) {
+    func favoritesCreate(parameters: NSDictionary?, completion: (success: String?, error: NSError?) -> ()) {
         let success = { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> () in
-            print(response)
-            if let response = response as? String {
-                completion(success: response, error: nil)
-            }
+            completion(success: "Status favorited.", error: nil)
         }
         
         let failure = { (operation: AFHTTPRequestOperation!, error: NSError!) -> () in
@@ -136,14 +133,11 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         )
     }
     
-    func statusesRetweet(parameters: AnyObject?, completion: (success: String?, error: NSError?) -> ()) {
+    func statusesRetweet(parameters:  NSDictionary?, completion: (success: String?, error: NSError?) -> ()) {
         let id = parameters?["id"]!
         
         let success = { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> () in
-            print(response)
-            if let response = response as? String {
-                completion(success: response, error: nil)
-            }
+            completion(success: "Status retweeted.", error: nil)
         }
         
         let failure = { (operation: AFHTTPRequestOperation!, error: NSError!) -> () in
@@ -151,7 +145,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         }
         
         POST(
-            "1.1/statuses/retweet/\(id).json",
+            "1.1/statuses/retweet/\(id!).json",
             parameters: parameters,
             success: success,
             failure: failure
@@ -160,10 +154,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     
     func statusesUpdate(parameters: AnyObject?, completion: (success: String?, error: NSError?) -> ()) {
         let success = { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> () in
-            print(response)
-            if let response = response as? String {
-                completion(success: response, error: nil)
-            }
+            completion(success: "Status updated.", error: nil)
         }
         
         let failure = { (operation: AFHTTPRequestOperation!, error: NSError!) -> () in

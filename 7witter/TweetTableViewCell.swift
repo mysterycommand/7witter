@@ -34,6 +34,7 @@ class TweetTableViewCell: UITableViewCell {
                 createdAtLabel.text = formatter.stringFromDate(tweet.createdAt!)
                 
                 tweetLabel.text = tweet.text
+                actionsView.tweet = tweet
             }
         }
     }
@@ -80,6 +81,7 @@ class TweetTableViewCell: UITableViewCell {
         
         contentView.addSubview(tweetLabel)
         
+        actionsView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         actionsView.translatesAutoresizingMaskIntoConstraints = false
 //        actionsView.backgroundColor = UIColor.randomColor()
         

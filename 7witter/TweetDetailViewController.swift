@@ -28,6 +28,7 @@ class TweetDetailViewController: UIViewController {
                 formatter.timeStyle = .ShortStyle
 
                 createdAtLabel.text = formatter.stringFromDate(tweet.createdAt!)
+                actionsView.tweet = tweet
             }
         }
     }
