@@ -14,6 +14,9 @@ class ActionsView: UIView {
     var retweetButton = UIButton()
     var favoriteButton = UIButton()
     
+    static let activeColor = UIColor.randomColor()
+    static let inactiveColor = ActionsView.activeColor.inverse()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -24,27 +27,21 @@ class ActionsView: UIView {
         /**
         * ACTIONS SUBVIEWS
         */
+        
+        let buttonsWithLabels = [
+            replyButton: "↰",
+            retweetButton: "⇆",
+            favoriteButton: "★",
+        ]
 
-        replyButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        replyButton.translatesAutoresizingMaskIntoConstraints = false
-        replyButton.backgroundColor = UIColor.randomColor()
-        replyButton.setTitle("↰", forState: .Normal)
-
-        addSubview(replyButton)
-
-        retweetButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        retweetButton.translatesAutoresizingMaskIntoConstraints = false
-        retweetButton.backgroundColor = UIColor.randomColor()
-        retweetButton.setTitle("⇆", forState: .Normal)
-
-        addSubview(retweetButton)
-
-        favoriteButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
-        favoriteButton.backgroundColor = UIColor.randomColor()
-        favoriteButton.setTitle("★", forState: .Normal)
-
-        addSubview(favoriteButton)
+        for (button, label) in buttonsWithLabels {
+            button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.backgroundColor = ActionsView.inactiveColor
+            button.setTitle(label, forState: .Normal)
+            
+            addSubview(button)
+        }
 
         let views = [
             "repl": replyButton,

@@ -28,7 +28,7 @@ class ComposeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        view.backgroundColor = UIColor.randomColor()
+        view.backgroundColor = UIColor.whiteColor()
 
         cancelBarButtonItem.target = self
         cancelBarButtonItem.action = "cancelTouchUpInside:event:"
@@ -47,7 +47,7 @@ class ComposeViewController: UIViewController {
          */
         userView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         userView.translatesAutoresizingMaskIntoConstraints = false
-        userView.backgroundColor = UIColor.randomColor()
+        //userView.backgroundColor = UIColor.randomColor()
 
         userView.user = User.currentUser
         
@@ -56,7 +56,7 @@ class ComposeViewController: UIViewController {
         tweetTextView.font = UIFont.systemFontOfSize(12.0, weight: 0.1)
         tweetTextView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         tweetTextView.translatesAutoresizingMaskIntoConstraints = false
-        tweetTextView.backgroundColor = UIColor.randomColor()
+        //tweetTextView.backgroundColor = UIColor.randomColor()
         tweetTextView.editable = true
         tweetTextView.sizeToFit()
         

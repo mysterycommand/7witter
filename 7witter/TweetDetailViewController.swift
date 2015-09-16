@@ -46,21 +46,21 @@ class TweetDetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        view.backgroundColor = UIColor.randomColor()
+        view.backgroundColor = UIColor.whiteColor()
         
         /**
         * MAIN SUBVIEWS
         */
         userView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         userView.translatesAutoresizingMaskIntoConstraints = false
-        userView.backgroundColor = UIColor.randomColor()
+        //userView.backgroundColor = UIColor.randomColor()
         
         view.addSubview(userView)
         
         tweetLabel.font = UIFont.systemFontOfSize(12.0, weight: 0.1)
         tweetLabel.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         tweetLabel.translatesAutoresizingMaskIntoConstraints = false
-        tweetLabel.backgroundColor = UIColor.randomColor()
+        //tweetLabel.backgroundColor = UIColor.randomColor()
         tweetLabel.numberOfLines = 0
         tweetLabel.sizeToFit()
         
@@ -77,7 +77,7 @@ class TweetDetailViewController: UIViewController {
         
         actionsView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         actionsView.translatesAutoresizingMaskIntoConstraints = false
-        actionsView.backgroundColor = UIColor.randomColor()
+        //actionsView.backgroundColor = UIColor.randomColor()
         
         view.addSubview(actionsView)
         

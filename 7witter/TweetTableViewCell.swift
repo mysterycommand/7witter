@@ -81,7 +81,7 @@ class TweetTableViewCell: UITableViewCell {
         contentView.addSubview(tweetLabel)
         
         actionsView.translatesAutoresizingMaskIntoConstraints = false
-        actionsView.backgroundColor = UIColor.randomColor()
+//        actionsView.backgroundColor = UIColor.randomColor()
         
         contentView.addSubview(actionsView)
         
