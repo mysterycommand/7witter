@@ -24,7 +24,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
         title = "Home"
     }
 

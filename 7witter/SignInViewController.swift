@@ -18,6 +18,7 @@ class SignInViewController: UIViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        title = "7witter"
     }
 
     override func viewDidLoad() {
@@ -27,11 +28,21 @@ class SignInViewController: UIViewController {
         view.backgroundColor = UIColor.randomColor()
 
         signInButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        signInButton.translatesAutoresizingMaskIntoConstraints = false
+
         signInButton.setTitle("Sign In", forState: .Normal)
         signInButton.backgroundColor = UIColor.randomColor()
         signInButton.addTarget(self, action: "signInTouchUpInside:event:", forControlEvents: .TouchUpInside)
+        signInButton.sizeToFit()
         
         view.addSubview(signInButton)
+        
+        let views = [
+            "signInButton": signInButton
+        ]
+        
+        view.addConstraints(Vfl.make("H:|-[signInButton]-|", views: views))
+        view.addConstraints(Vfl.make("V:|-16-[signInButton]", views: views))
     }
 
     override func didReceiveMemoryWarning() {
