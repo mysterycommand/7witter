@@ -15,6 +15,8 @@ class TweetDetailViewController: UIViewController {
     var tweetLabel = UILabel()
     var createdAtLabel = UILabel()
     
+    var actionsView = ActionsView()
+    
     var tweet: Tweet? {
         didSet {
             if let tweet = tweet {
@@ -73,16 +75,24 @@ class TweetDetailViewController: UIViewController {
         
         view.addSubview(createdAtLabel)
         
+        actionsView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        actionsView.translatesAutoresizingMaskIntoConstraints = false
+        actionsView.backgroundColor = UIColor.randomColor()
+        
+        view.addSubview(actionsView)
+        
         let views = [
             "user": userView,
             "twee": tweetLabel,
             "crea": createdAtLabel,
+            "acti": actionsView,
         ]
         
         view.addConstraints(Vfl.make("H:|-8-[user]-8-|", views: views))
         view.addConstraints(Vfl.make("H:|-16-[twee]-16-|", views: views))
         view.addConstraints(Vfl.make("H:|-16-[crea]-16-|", views: views))
-        view.addConstraints(Vfl.make("V:|-8-[user(66)]-4-[twee]-4-[crea]", views: views))
+        view.addConstraints(Vfl.make("H:|-8-[acti]-8-|", views: views))
+        view.addConstraints(Vfl.make("V:|-8-[user(66)]-4-[twee]-4-[crea]-[acti]", views: views))
     }
 
     override func didReceiveMemoryWarning() {
