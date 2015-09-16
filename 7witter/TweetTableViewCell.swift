@@ -17,7 +17,7 @@ class TweetTableViewCell: UITableViewCell {
     var createdAtLabel = UILabel()
     var tweetLabel = UILabel()
     
-    var bottom = UIView()
+    var actionsView = ActionsView()
     
     var tweet: Tweet? {
         didSet {
@@ -80,10 +80,10 @@ class TweetTableViewCell: UITableViewCell {
         
         contentView.addSubview(tweetLabel)
         
-        bottom.translatesAutoresizingMaskIntoConstraints = false
-        bottom.backgroundColor = UIColor.randomColor()
+        actionsView.translatesAutoresizingMaskIntoConstraints = false
+        actionsView.backgroundColor = UIColor.randomColor()
         
-        contentView.addSubview(bottom)
+        contentView.addSubview(actionsView)
         
         let views = [
             "prof": userProfileImageView,
@@ -91,16 +91,16 @@ class TweetTableViewCell: UITableViewCell {
             "scre": userScreenNameLabel,
             "crea": createdAtLabel,
             "twee": tweetLabel,
-            "bott": bottom
+            "acti": actionsView
         ]
         
         contentView.addConstraints(Vfl.make("H:|-8-[prof(50@999)]-4-[name]-4-[scre]-4-[crea]-8-|", views: views))
         contentView.addConstraints(Vfl.make("H:|-8-[prof]-4-[twee]-8-|", views: views))
-        contentView.addConstraints(Vfl.make("H:|-4-[bott]-4-|", views: views))
-        contentView.addConstraints(Vfl.make("V:|-8-[name]-4-[twee]-(>=8)-|", views: views))
+        contentView.addConstraints(Vfl.make("H:|-4-[acti]-4-|", views: views))
+        contentView.addConstraints(Vfl.make("V:|-8-[name]-4-[twee]-(>=8)-[acti]|", views: views))
         contentView.addConstraints(Vfl.make("V:|-8-[scre]", views: views))
         contentView.addConstraints(Vfl.make("V:|-8-[crea]", views: views))
-        contentView.addConstraints(Vfl.make("V:|-8-[prof(50)]-(>=8)-[bott(1@999)]|", views: views))
+        contentView.addConstraints(Vfl.make("V:|-8-[prof(50)]-(>=8)-[acti]|", views: views))
     }
 
     override func awakeFromNib() {

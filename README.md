@@ -2,7 +2,7 @@
 
 This is a basic twitter app to read and compose tweets via the [Twitter API](https://apps.twitter.com/).
 
-Time spent: `16`
+Time spent: `17`
 
 ### Features
 
@@ -15,7 +15,7 @@ Time spent: `16`
 - [X] User can pull to refresh
 - [X] User can compose a new tweet by tapping on a compose button.
 - [X] User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
-- [ ] User can retweet, favorite, and reply to the tweet directly from the timeline feed.
+- [X] User can retweet, favorite, and reply to the tweet directly from the timeline feed.
 
 #### Optional
 

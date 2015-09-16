@@ -52,7 +52,7 @@ class ActionsView: UIView {
             "favo": favoriteButton,
         ]
 
-        addConstraints(Vfl.make("H:|-8-[repl]-[retw]-[favo]-8-|", views: views))
+        addConstraints(Vfl.make("H:|-8-[repl]-4-[retw]-4-[favo]", views: views))
         addConstraints(Vfl.make("V:|-8-[repl]-8-|", views: views))
         addConstraints(Vfl.make("V:|-8-[retw]-8-|", views: views))
         addConstraints(Vfl.make("V:|-8-[favo]-8-|", views: views))
