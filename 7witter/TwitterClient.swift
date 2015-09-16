@@ -115,4 +115,66 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             failure: failure
         )
     }
+
+    func favoritesCreate(parameters: AnyObject?, completion: (success: String?, error: NSError?) -> ()) {
+        let success = { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> () in
+            print(response)
+            if let response = response as? String {
+                completion(success: response, error: nil)
+            }
+        }
+        
+        let failure = { (operation: AFHTTPRequestOperation!, error: NSError!) -> () in
+            completion(success: nil, error: error)
+        }
+
+        POST(
+            "1.1/favorites/create.json",
+            parameters: parameters,
+            success: success,
+            failure: failure
+        )
+    }
+    
+    func statusesRetweet(parameters: AnyObject?, completion: (success: String?, error: NSError?) -> ()) {
+        let id = parameters?["id"]!
+        
+        let success = { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> () in
+            print(response)
+            if let response = response as? String {
+                completion(success: response, error: nil)
+            }
+        }
+        
+        let failure = { (operation: AFHTTPRequestOperation!, error: NSError!) -> () in
+            completion(success: nil, error: error)
+        }
+        
+        POST(
+            "1.1/statuses/retweet/\(id).json",
+            parameters: parameters,
+            success: success,
+            failure: failure
+        )
+    }
+    
+    func statusesUpdate(parameters: AnyObject?, completion: (success: String?, error: NSError?) -> ()) {
+        let success = { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> () in
+            print(response)
+            if let response = response as? String {
+                completion(success: response, error: nil)
+            }
+        }
+        
+        let failure = { (operation: AFHTTPRequestOperation!, error: NSError!) -> () in
+            completion(success: nil, error: error)
+        }
+        
+        POST(
+            "1.1/statuses/update.json",
+            parameters: parameters,
+            success: success,
+            failure: failure
+        )
+    }
 }
